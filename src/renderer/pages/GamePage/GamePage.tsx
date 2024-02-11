@@ -1,14 +1,16 @@
 import useGamePage from "./GamePage.hooks";
-import TicTacToeSymbol from "../../components/TicTacToeSymbol";
-import { Player } from "../../types/enums";
+import GameGrid from "./_components/GameGrid";
+import TurnIndicator from "./_components/TurnIndicator";
 
 export default function GamePage() {
-  const { currentTurn } = useGamePage();
+  const { currentTurn, onCellClicked, positions } = useGamePage();
+
   return (
-    <div>
-      Turn: {currentTurn}
-      <TicTacToeSymbol player={Player.O} />
-      <TicTacToeSymbol player={Player.X} />
+    <div className="relative flex  h-full items-center justify-center">
+      <div className="absolute left-0 top-4">
+        <TurnIndicator player={currentTurn} />
+      </div>
+      <GameGrid positions={positions} onCellClicked={onCellClicked} />
     </div>
   );
 }

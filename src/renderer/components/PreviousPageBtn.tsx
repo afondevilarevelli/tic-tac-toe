@@ -8,10 +8,13 @@ export default function PreviousPageBtn() {
   const isIndexLocation = location.pathname == "/";
 
   return (
-    <div>
+    <div
+      className={!isIndexLocation ? "tooltip tooltip-right" : undefined}
+      data-tip="Go home"
+    >
       <button
         onClick={() => navigate("/")}
-        className={"btn btn-circle " + (isIndexLocation && "btn-disabled")}
+        className={"btn btn-circle " + (isIndexLocation && "invisible")}
       >
         <FaArrowLeft />
       </button>

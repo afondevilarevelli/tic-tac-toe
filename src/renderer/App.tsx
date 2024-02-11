@@ -8,11 +8,15 @@ root.render(<App />);
 
 function App() {
   return (
-    <main>
+    <>
       <HashRouter>
-        <PreviousPageBtn />
-        <Router />
+        <div className="h-[8vh] pl-4 pt-4">
+          <PreviousPageBtn />
+        </div>
+        <main className="h-[92vh] px-8 py-4">
+          <Router />
+        </main>
       </HashRouter>
-    </main>
+    </>
   );
 }

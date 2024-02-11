@@ -1,11 +1,12 @@
-import React, { memo } from "react";
-import { Player } from "../types/enums";
+import { memo } from "react";
+import { Player } from "../../../types/enums";
 
 type TProps = {
   player: Player;
+  size?: "small" | "big";
 };
 
-function TicTacToeSymbol({ player }: TProps) {
+function TicTacToeSymbol({ player, size = "big" }: TProps) {
   const clipPathDict = {
     [Player.X]: {
       clipPath:
@@ -21,9 +22,14 @@ function TicTacToeSymbol({ player }: TProps) {
     [Player.O]: "bg-blue-500",
   };
 
+  const sizeClassNames = {
+    small: "h-6 w-6",
+    big: "h-32 w-32 xl:h-48 xl:w-48 2xl:h-52 2xl:w-52",
+  };
+
   return (
     <div
-      className={"h-48 w-48 " + classNamesDict[player]}
+      className={sizeClassNames[size] + " " + classNamesDict[player]}
       style={clipPathDict[player]}
     ></div>
   );
