@@ -17,7 +17,7 @@ export default function GameFinishedBanner({
   }, []);
 
   return (
-    <dialog ref={modalRef} className="modal">
+    <dialog ref={modalRef} className="modal" onClose={onPlayAgainClicked}>
       <div className="modal-box">
         <h3 className="text-lg font-bold">
           {winner ? <>WINNER: {winner}</> : <>DRAW</>}
