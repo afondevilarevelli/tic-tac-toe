@@ -14,8 +14,6 @@ export default function GameFinishedBanner({
 
   useEffect(() => {
     modalRef.current?.showModal();
-
-    return () => modalRef.current?.close();
   }, []);
 
   return (

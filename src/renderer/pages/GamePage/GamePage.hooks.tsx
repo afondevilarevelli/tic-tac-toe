@@ -20,15 +20,12 @@ export default function useGamePage() {
   ];
   const [positions, setPositions] = useState(initialPositions);
 
-  console.log(positions);
   function onCellClicked(pos: number) {
     if (gameFinished) return;
 
-    if (positions[pos]) return;
-    setPositions((actual) => {
-      actual[pos] = currentTurn;
-      return actual;
-    });
+    setPositions((actual) =>
+      actual.map((ac, idx) => (pos == idx ? currentTurn : ac)),
+    );
 
     setCurrentTurn((actual) => (actual == Player.X ? Player.O : Player.X));
   }
@@ -43,12 +40,8 @@ export default function useGamePage() {
   useEffect(() => {
     function checkGame() {
       const winner = getWinnerPlayer(positions);
-
-      console.log("WINNER:", winner);
-      if (winner) {
-        setWinner(winner);
-        setGameFinished(true);
-      } else if (positions.every((p) => p)) setGameFinished(true);
+      if (winner) setWinner(winner);
+      setGameFinished(!!winner || positions.every((p) => p));
     }
 
     checkGame();
