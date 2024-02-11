@@ -24,16 +24,17 @@ const WINING_CASES = [
 export function getWinnerPlayer(positions: TPositionItem[]) {
   // Check X
   const onlyXPositions = positions.map((p) => (p == Player.X ? 1 : 0));
-  const winnerX = WINING_CASES.some((wc) => {
-    wc.every((wci, idx) => wci === onlyXPositions[idx]);
-  });
+  const winnerX = WINING_CASES.some((wc) =>
+    wc.every((wci, idx) => wci === onlyXPositions[idx]),
+  );
+
   if (winnerX) return Player.X;
 
   // Check O
   const onlyOPositions = positions.map((p) => (p == Player.O ? 1 : 0));
-  const winnerO = WINING_CASES.some((wc) => {
-    wc.every((wci, idx) => wci === onlyOPositions[idx]);
-  });
+  const winnerO = WINING_CASES.some((wc) =>
+    wc.every((wci, idx) => wci === onlyOPositions[idx]),
+  );
   if (winnerO) return Player.O;
 
   // No winner

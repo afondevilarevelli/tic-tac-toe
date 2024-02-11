@@ -18,6 +18,7 @@ export default function GamePage() {
       <div className="absolute left-0 top-4">
         <TurnIndicator player={currentTurn} />
       </div>
+
       <GameGrid positions={positions} onCellClicked={onCellClicked} />
 
       {gameFinished && (

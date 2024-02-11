@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Player } from "../../../types/enums";
 import FireworksAnimation from "./FireworksAnimation";
+import TicTacToeSymbol from "./TicTacToeSymbol";
 
 type TProps = {
   winner: Player | null;
@@ -22,11 +23,16 @@ export default function GameFinishedBanner({
       {winner && <FireworksAnimation />}
       <div className="modal-box">
         <h3 className="text-lg font-bold">
-          {winner ? <>WINNER: {winner}</> : <>DRAW</>}
+          {winner ? (
+            <div className="flex items-center gap-4">
+              WINNER: <TicTacToeSymbol player={winner} size="small" />
+            </div>
+          ) : (
+            <>DRAW</>
+          )}
         </h3>
         <div className="modal-action">
           <form method="dialog" onSubmit={onPlayAgainClicked}>
-            {/* if there is a button in form, it will close the modal */}
             <button type="submit" className="btn">
               Play again
             </button>
