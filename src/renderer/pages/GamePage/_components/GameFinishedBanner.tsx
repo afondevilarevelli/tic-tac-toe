@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Player } from "../../../types/enums";
+import FireworksAnimation from "./FireworksAnimation";
 
 type TProps = {
   winner: Player | null;
@@ -18,6 +19,7 @@ export default function GameFinishedBanner({
 
   return (
     <dialog ref={modalRef} className="modal" onClose={onPlayAgainClicked}>
+      {winner && <FireworksAnimation />}
       <div className="modal-box">
         <h3 className="text-lg font-bold">
           {winner ? <>WINNER: {winner}</> : <>DRAW</>}

@@ -23,6 +23,7 @@ export default function useGamePage() {
   function onCellClicked(pos: number) {
     if (gameFinished) return;
 
+    if (positions[pos]) return;
     setPositions((actual) =>
       actual.map((ac, idx) => (pos == idx ? currentTurn : ac)),
     );
