@@ -1,28 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Player } from "../../types/enums";
-
-export type TPositionItem = Player | null;
-// Each index represents a position in the game grid
-// 0|1|2
-// 3|4|5
-// 6|7|8
-const initialPositions: TPositionItem[] = [
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
+import { TPositionItem, getWinnerPlayer } from "./utils";
 
 export default function useGamePage() {
   const [currentTurn, setCurrentTurn] = useState(Player.X);
+  const [winner, setWinner] = useState<Player | null>(null);
+  const [gameFinished, setGameFinished] = useState(false);
+
+  const initialPositions: TPositionItem[] = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
   const [positions, setPositions] = useState(initialPositions);
 
+  console.log(positions);
   function onCellClicked(pos: number) {
+    if (gameFinished) return;
+
     if (positions[pos]) return;
     setPositions((actual) => {
       actual[pos] = currentTurn;
@@ -32,9 +33,33 @@ export default function useGamePage() {
     setCurrentTurn((actual) => (actual == Player.X ? Player.O : Player.X));
   }
 
+  function resetGame() {
+    setGameFinished(false);
+    setCurrentTurn(Player.X);
+    setWinner(null);
+    setPositions(initialPositions);
+  }
+
+  useEffect(() => {
+    function checkGame() {
+      const winner = getWinnerPlayer(positions);
+
+      console.log("WINNER:", winner);
+      if (winner) {
+        setWinner(winner);
+        setGameFinished(true);
+      } else if (positions.every((p) => p)) setGameFinished(true);
+    }
+
+    checkGame();
+  }, [currentTurn]);
+
   return {
     currentTurn,
     onCellClicked,
     positions,
+    resetGame,
+    winner,
+    gameFinished,
   };
 }

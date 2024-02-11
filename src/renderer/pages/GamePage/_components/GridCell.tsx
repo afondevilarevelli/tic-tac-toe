@@ -1,5 +1,5 @@
 import TicTacToeSymbol from "./TicTacToeSymbol";
-import { TPositionItem } from "../GamePage.hooks";
+import { TPositionItem } from "../utils";
 
 type TProps = {
   item: TPositionItem;

@@ -1,4 +1,4 @@
-import { TPositionItem } from "../GamePage.hooks";
+import { TPositionItem } from "../utils";
 import GridCell from "./GridCell";
 
 type TProps = {
