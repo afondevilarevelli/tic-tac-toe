@@ -29,7 +29,9 @@ function TicTacToeSymbol({ player, size = "big" }: TProps) {
 
   return (
     <div
-      className={sizeClassNames[size] + " " + classNamesDict[player]}
+      className={
+        "inline-block " + sizeClassNames[size] + " " + classNamesDict[player]
+      }
       style={clipPathDict[player]}
     ></div>
   );
